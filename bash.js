@@ -18,6 +18,27 @@ process.stdin.on('data', (data) => {
 //   }
 // });
 
-const pwdFunc = require('./pwd')
-pwdFunc();
+const customPrompt = outputData => {
+  console.log(outputData)
+  process.stdout.write('>')
+};
+customPrompt('Hello Welcome to node')
+
+process.stdin.on('data', (data) => {
+  const entry = data.toString().trim();
+  const [cmd, arg1] = entry.split(' ');
+  switch (cmd) {
+    case 'pwd':
+      require('./pwd')(customPrompt);
+      break;
+    case 'ls':
+      require('./ls')(customPrompt);
+      break;
+    case 'cat':
+      require('./cat')(customPrompt, arg1);
+      break;
+    default:
+      customPrompt('Command not found')
+  }
+})
 

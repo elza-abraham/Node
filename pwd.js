@@ -1,13 +1,3 @@
-module.exports = function(){
-  process.stdout.write('prompt > ');
-
-  process.stdin.on('data', (data) => {
-    const cmd = data.toString().trim();
-    if (cmd === 'pwd'){
-      process.stdout.write(process.cwd());
-      process.stdout.write('\nprompt > ');
-    }
-  });
-}
-
+module.exports = (done) => done(process.cwd());
+  // process.stdout.write(__dirname);//shows where this file is saved. so when we try to execute from other folder, it will show soemthing else.
 
