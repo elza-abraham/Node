@@ -26,7 +26,7 @@ customPrompt('Hello Welcome to node')
 
 process.stdin.on('data', (data) => {
   const entry = data.toString().trim();
-  const [cmd, arg1] = entry.split(' ');
+  const [cmd, arg] = entry.split(' ');
   switch (cmd) {
     case 'pwd':
       require('./pwd')(customPrompt);
@@ -35,7 +35,10 @@ process.stdin.on('data', (data) => {
       require('./ls')(customPrompt);
       break;
     case 'cat':
-      require('./cat')(customPrompt, arg1);
+      require('./cat')(customPrompt, arg);
+      break;
+    case 'curl':
+      require('./curl')(customPrompt, arg);
       break;
     default:
       customPrompt('Command not found')
